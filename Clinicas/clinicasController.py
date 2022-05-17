@@ -48,7 +48,7 @@ def buscarClinicaCNPJ():
     while True:
         cnpj = input("Insira o CNPJ: ")
         resultado = banco.pegarCNPJ(cnpj)
-        if len(resultado) > 0:
+        if resultado:
             print(f'''
             Nome: {resultado.get('nome')}
             CNPJ: {resultado.get('cnpj')}
