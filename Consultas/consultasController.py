@@ -166,7 +166,21 @@ def listarConsultasRetorno():
 
 
 def listarConsultasIntervalo():
-    return None
+    print("formato: DD/MM/AAAA-DD/MM/AAAA")
+    data = strip(input("Insira as datas: "))
+    datas = data.split('-')
+    consultas = banco.pegarTodos()
+    for consulta in consultas:
+        dataconsulta = consulta.get("data")
+        dataconsulta = dataconsulta.replace("/", "")
+        if int(datas[0].replace("/", "")) > dataconsulta < int(datas[1].replace("/", "")):
+            print(f'''
+                Paciente: {consulta.get('paciente')}
+                Médico: {consulta.get('medico')}
+                Data: {consulta.get('data')}
+                Retorno: {consulta.get('retorno')}
+                Observação: {consulta.get('observacao')}
+            ''')
 
 
 def linha1():
