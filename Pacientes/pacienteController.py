@@ -1,4 +1,5 @@
 import menusGerais
+
 from Pacientes import pacienteBanco as banco
 from Pacientes.pacienteBanco import *
 
@@ -49,7 +50,7 @@ def buscarPacienteCpf():
     while True:
         cpf = input("Insira o CPF: ")
         resultado = banco.pegarCPF(cpf)
-        if len(resultado) > 0:
+        if resultado:
             print(f'''
             Nome: {resultado.get('nome')}
             CPF: {resultado.get('cpf')}
@@ -111,7 +112,7 @@ def removerPaciente():
 def listarTodosPacientes():
     print("-" * 30)
     pacientes = banco.pegarTodos()
-    if len(pacientes) > 0:
+    if pacientes:
         for paciente in pacientes:
             print(f'''
             Nome: {paciente.get('nome')}
