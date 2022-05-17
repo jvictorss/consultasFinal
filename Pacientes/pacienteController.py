@@ -1,3 +1,4 @@
+from Pacientes.pacienteBanco import checkCPF
 import menusGerais
 
 from Pacientes import pacienteBanco as banco
@@ -20,19 +21,26 @@ def main():
         case 5:
             listarTodosPacientes()
         case 6:
-            print("\n...  Saindo do Menu de Paciente  ...\n... Voltando para o Menu Principal ...")
+            print("{:-^60}".format(" ... Saindo do Menu de Paciente ... "))
+            print("{:-^60}".format(" ... Voltando para o Menu Principal ... "))
+            
     linha2()
 
 
 def cadastrarPaciente():
-    print("=" * 30)
-    cpf = input("Digite o CPF: ")
-    nome = input("Insira o nome do Paciente: ")
-    email = input("Insira o e-mail do paciente: ")
-    telefone = input('Insira o telefone do paciente: ')
-    endereco = input('Insira o endereco do paciente: ')
-    paciente = {'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco}
-    banco.adicionar(paciente)
+    print("{:=^60}".format(" Cadastrando Paciente "))
+    while True:
+        cpf = input("Digite o CPF: ")
+        checkCPF(cpf)
+        if (checkCPF == True):
+            print(f"Já existe um cadastro do paciente {paciente.get('nome')} para o CPF {cpf}.")
+            break
+        nome = input("Insira o nome do Paciente: ")
+        email = input("Insira o e-mail do paciente: ")
+        telefone = input('Insira o telefone do paciente: ')
+        endereco = input('Insira o endereco do paciente: ')
+        paciente = {'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco}
+        banco.adicionar(paciente)
 
     while True:
         escolha = str(input("Deseja adicionar mais um Paciente? [S] [N]"))
@@ -123,10 +131,12 @@ def listarTodosPacientes():
                    ''')
         print("-" * 30)
     else:
-        print('Não há pacientes cadastrados.')
-        print("=" * 30)
+        cpfNaoCadastrado()
     main()
 
+def cpfNaoCadastrado():
+    print("{:=ˆ60}".format(" O CPF não está cadastrado. "))
+    linha2()
 
 def linha1():
     print("=" * 60)

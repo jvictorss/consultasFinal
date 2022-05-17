@@ -1,3 +1,4 @@
+from Funcionario.funcionarioBanco import checkMatricula
 import menusGerais
 
 from Funcionario import funcionarioBanco as banco
@@ -26,14 +27,18 @@ def main():
 
 def cadastrarFuncionario():
     print("=" * 30)
-    matricula = input("Insira a matrícula: ")
-    cpf = input("Insira o CPF: ")
-    nome = input("Insira o nome do Funcionário: ")
-    email = input("Insira o e-mail do Funcionário: ")
-    telefone = input('Insira o telefone do Funcionário: ')
-    endereco = input('Insira o endereco do Funcionário: ')
+    while True:
+        matricula = input("Insira a matrícula: ")
+        if checkMatricula(matricula) == True:
+            print(f"Já existe um funcionário {funcionario.get('nome')} cadastrado com a matrícula {matricula}")
+            break
+        cpf = input("Insira o CPF: ")
+        nome = input("Insira o nome do Funcionário: ")
+        email = input("Insira o e-mail do Funcionário: ")
+        telefone = input('Insira o telefone do Funcionário: ')
+        endereco = input('Insira o endereco do Funcionário: ')
 
-    banco.adicionar({'matricula': matricula, 'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco})
+        banco.adicionar({'matricula': matricula, 'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco})
 
     while True:
         escolha = str(input("Deseja adicionar mais um Funcionário? [S] [N]"))

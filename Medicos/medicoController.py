@@ -25,14 +25,19 @@ def main():
 
 def cadastrarMedico():
     print("=" * 30)
-    crm = input("Insira o CRM: ")
-    cpf = input("Insira o CPF: ")
-    nome = input("Insira o nome do Médico: ")
-    email = input("Insira o e-mail do Médico: ")
-    telefone = input('Insira o telefone do Médico: ')
-    endereco = input('Insira o endereco do Médico: ')
+    while True: 
+        crm = input("Insira o CRM: ")
+        checkCRM(crm)
+        if (checkCRM == True):
+            print(f"Já existe um cadastro do paciente {paciente.get('nome')} para o CPF {cpf}.")
+            break
+        cpf = input("Insira o CPF: ")
+        nome = input("Insira o nome do Médico: ")
+        email = input("Insira o e-mail do Médico: ")
+        telefone = input('Insira o telefone do Médico: ')
+        endereco = input('Insira o endereco do Médico: ')
 
-    banco.adicionar({'crm': crm, 'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco})
+        banco.adicionar({'crm': crm, 'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco})
 
     while True:
         escolha = str(input("Deseja adicionar mais um Médico? [S] [N]"))

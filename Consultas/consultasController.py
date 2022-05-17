@@ -1,8 +1,8 @@
 import menusGerais
-from Pacientes import pacienteBanco as banco
-from Pacientes.pacienteBanco import *
-
-from Consultas.consultasBanco import validaData
+from Consultas import consultasBanco as banco
+from Consultas.consultaBanco import *
+from Consultas.consultasBanco import checkPaciente, validaData
+from datetime import date
 
 
 def main():
@@ -31,20 +31,24 @@ def main():
 
 def marcarConsulta():
     print("=" * 30)
-    codigo = input("Digite o Código da consulta: ")
-    paciente = input("Insira o nome do Paciente: ")
-    medico = input("Insira o nome do Médico: ")
-    data = input('Insira a data da consulta (dd/mm/aaaa): ')
-    hora = input('Insira a hora da consulta (HH:MM):')
-    # if validaData("%s %s".format(data, hora)):
-    #   Continua normalmente
-    # else: 
-    #   Pede para inserir uma data válida
-    
-    retorno = input('Esta consulta dá direito a retorno? [S]/[N]: ')
-    observacao = input('Insira a observacao, caso haja: ')
+    while True:
+        codigo = input("Digite o Código da consulta: ")
+        paciente = input("Insira o nome do Paciente: ")
+        checkPaciente(paciente)
+        if checkPaciente() == True:
+            print(f"Já existe uma consulta marcada para o paciente {paciente}.")
+            break
+        medico = input("Insira o nome do Médico: ")
+        data = input('Insira a data e hora da consulta (dd/mm/aaaa HH:MM): ')
+        validaData(data)
+        retorno = False
+        dataRetorno = data + 15
+        hoje = date.today()
+        if (hoje > dataRetorno):
+            retorno = True
+        observacao = input('Insira a observacao, caso haja: ')
 
-    banco.adicionar({'codigo': codigo, 'paciente': paciente, 'medico': medico, 'data': data, 'hora': hora, 'retorno': retorno, 'observacao': observacao})
+        banco.adicionar({'codigo': codigo, 'paciente': paciente, 'medico': medico, 'data': data, 'retorno': retorno, 'observacao': observacao})
 
     while True:
         escolha = str(input("Deseja adicionar mais uma Consulta? [S] [N]"))
@@ -72,6 +76,12 @@ def buscarConsultaPaciente():
             Observação: {resultado.get('observacao')}
             ''')
             print("=" * 30)
+            consulta = input("A consulta foi realizada? (S/N): ")
+            if consulta.upper() == "S":
+                print(f"Aguarde a data de retorno da consulta, que será dia {retorno}.")
+                break
+            else: 
+                print(f"Aguarde a data da consulta, que será dia {data}.")
             break
         else:
             print("Consulta não encontrada, digite novamente.")
@@ -85,9 +95,9 @@ def editarConsulta():
         paciente = input("Insira nome do Paciente: ")
         if banco.checkPaciente(paciente):
             medico = input("Insira o nome do novo médico: ")
-            data = input("Insira a nova data da consulta: ")
-            hora = input("Insira a nova hora da consulta: ")
-            print(banco.altera(paciente, medico, data, hora))
+            data = input("Insira a nova data da consulta (DD/MM/AAAA HH:MM): ")
+            retorno = data + 15
+            print(banco.altera(paciente, medico, data, retorno))
             print("-" * 30)
             break
         else:
