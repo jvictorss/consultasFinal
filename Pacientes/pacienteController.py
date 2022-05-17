@@ -30,13 +30,13 @@ def cadastrarPaciente():
     email = input("Insira o e-mail do paciente: ")
     telefone = input('Insira o telefone do paciente: ')
     endereco = input('Insira o endereco do paciente: ')
-
-    banco.adicionar({'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco})
+    paciente = {'cpf': cpf, 'nome': nome, 'email': email, 'telefone': telefone, 'endereco': endereco}
+    banco.adicionar(paciente)
 
     while True:
         escolha = str(input("Deseja adicionar mais um Paciente? [S] [N]"))
         if escolha.upper() == 'S':
-            adicionar()
+            adicionar(paciente)
         elif escolha.upper() == 'N':
             break
         else:
