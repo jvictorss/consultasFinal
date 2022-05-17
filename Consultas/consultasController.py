@@ -152,7 +152,17 @@ def listarConsultas():
 
 
 def listarConsultasRetorno():
-    return None
+    consultas = banco.pegarTodos()
+    if len(consultas > 0):
+        for paciente in consultas:
+            if paciente.get('retorno'):
+                print(f'''
+                Paciente: {paciente.get('paciente')}
+                Médico: {paciente.get('medico')}
+                Data consulta: {paciente.get('data')}
+                Retorno: {paciente.get('retorno')}
+                Observacao: {paciente.get('observacao')}
+                ''')
 
 
 def listarConsultasIntervalo():
