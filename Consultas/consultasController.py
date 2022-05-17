@@ -173,7 +173,7 @@ def listarConsultasIntervalo():
     for consulta in consultas:
         dataconsulta = consulta.get("data")
         dataconsulta = dataconsulta.replace("/", "")
-        if int(datas[0].replace("/", "")) > dataconsulta < int(datas[1].replace("/", "")):
+        if int(datas[0].replace("/", "")) =< dataconsulta <= int(datas[1].replace("/", "")):
             print(f'''
                 Paciente: {consulta.get('paciente')}
                 Médico: {consulta.get('medico')}
