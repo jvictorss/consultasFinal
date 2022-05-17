@@ -1,4 +1,5 @@
 import menusGerais
+
 from Funcionario import funcionarioBanco as banco
 from Funcionario.funcionarioBanco import *
 
@@ -50,7 +51,7 @@ def buscarFuncionarioMatricula():
     while True:
         matricula = input("Insira a matrícula: ")
         resultado = banco.pegarMatricula(matricula)
-        if len(resultado) > 0:
+        if resultado:
             print(f'''
             Nome: {resultado.get('nome')}
             Matrícula: {resultado.get('matricula')}
@@ -113,7 +114,7 @@ def removerFuncionario():
 def listarTodosFuncionarios():
     print("-" * 30)
     funcionarios = banco.pegarTodos()
-    if len(funcionarios) > 0:
+    if funcionarios:
         for funcionario in funcionarios:
             print(f'''
             Nome: {funcionario.get('nome')}
