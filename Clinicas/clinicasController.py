@@ -1,4 +1,5 @@
 import menusGerais
+
 from Clinicas import clinicasBanco as banco
 from Clinicas.clinicasBanco import *
 
@@ -47,7 +48,7 @@ def buscarClinicaCNPJ():
     while True:
         cnpj = input("Insira o CNPJ: ")
         resultado = banco.pegarCNPJ(cnpj)
-        if len(resultado) > 0:
+        if resultado:
             print(f'''
             Nome: {resultado.get('nome')}
             CNPJ: {resultado.get('cnpj')}
@@ -105,7 +106,7 @@ def removerClinica():
 def listarTodasClinicas():
     print("-" * 30)
     clinicas = banco.pegarTodos()
-    if len(clinicas) > 0:
+    if clinicas:
         for clinica in clinicas:
             print(f'''
             Nome: {clinicas.get('nome')}
