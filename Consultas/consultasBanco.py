@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 
 def atualizaBanco():
@@ -58,3 +59,22 @@ def remover(codigo):
 def pegarTodos():
     banco = atualizaBanco()
     return banco.values()
+
+
+def pegarConsultasEmIntervaloDeData(data_inicial, data_final):
+    baseDeDados = atualizaBanco()
+    entre_datas = []
+    data_inicial_formatada = datetime.strptime(data_inicial, '%d/%m/%Y %H:%M')
+    data_final_formatada = datetime.strptime(data_final, '%d/%m/%Y %H:%M')
+    for consulta in baseDeDados: 
+        consulta_data = datetime.strptime(baseDeDados[consulta]["data"], '%d/%m/%Y %H:%M')
+        if consulta_data >= data_inicial_formatada and consulta_data <= data_final_formatada:
+            entre_datas.append(baseDeDados[consulta])
+    return entre_datas
+
+
+def validaData(data):
+    try:
+        return datetime.strptime(data, '%d/%m/%Y %H:%M')
+    except:
+        print("Data invalida")

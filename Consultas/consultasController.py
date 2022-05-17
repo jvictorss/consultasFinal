@@ -2,6 +2,8 @@ import menusGerais
 from Pacientes import pacienteBanco as banco
 from Pacientes.pacienteBanco import *
 
+from Consultas.consultasBanco import validaData
+
 
 def main():
     print("")
@@ -32,8 +34,13 @@ def marcarConsulta():
     codigo = input("Digite o Código da consulta: ")
     paciente = input("Insira o nome do Paciente: ")
     medico = input("Insira o nome do Médico: ")
-    data = input('Insira a data da consulta: ')
-    hora = input('Insira a hora da consulta: ')
+    data = input('Insira a data da consulta (dd/mm/aaaa): ')
+    hora = input('Insira a hora da consulta (HH:MM):')
+    # if validaData("%s %s".format(data, hora)):
+    #   Continua normalmente
+    # else: 
+    #   Pede para inserir uma data válida
+    
     retorno = input('Esta consulta dá direito a retorno? [S]/[N]: ')
     observacao = input('Insira a observacao, caso haja: ')
 
