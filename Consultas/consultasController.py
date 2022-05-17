@@ -35,15 +35,8 @@ def marcarConsulta():
     paciente = input("Insira o nome do Paciente: ")
     medico = input("Insira o nome do Médico: ")
     data = input('Insira a data da consulta (dd/mm/aaaa): ')
-    # if validaData(data):
-    #   Continua normalmente
-    # else: 
-    #   Pede para inserir uma data válida
-    
-        
-    hora = input('Insira a hora da consulta: ')
-    validaData("%s %s".format(data, hora))
-    # if validaHora(hora):
+    hora = input('Insira a hora da consulta (HH:MM):')
+    # if validaData("%s %s".format(data, hora)):
     #   Continua normalmente
     # else: 
     #   Pede para inserir uma data válida
